@@ -1,0 +1,10 @@
+﻿@model PanasShop.Models.ViewModels.Cart.CartVM
+
+@*Your cart:@Model.Quantity item(s) - @Model.Price $
+<br />
+@Html.ActionLink("Checkout", "Cart")*@
+
+Your cart: @Model.Quantity item(s) - @Model.Price UAH
+<br />
+@Html.ActionLink("Checkout","Cart", "", new { @class = "font-weight-bold" })
+<img class="cart-icon" src="~/Content/img/shopping-cart (1).svg" alt="cart" />

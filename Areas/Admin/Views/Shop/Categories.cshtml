@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PanasShop.Models.ViewModels.Shop.CategoryVM>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+@if (TempData["SM"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SM"]
+    </div>
+}
+
+<div class="new-cat">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Category Name</span>
+        </div>
+        <input type="text" id="newcatname" class="form-control" />
+    </div>
+    <p>
+        <a href="#" id="newcata" class="btn btn-success">Add a new Category</a>
+        <span class="ajax-text">
+            <img src="~/Content/Img/ajax-loader.gif" height="60" />
+        </span>
+    </p>
+</div>
+@if (!Model.Any())
+{
+    <h1 class="text-center">There are no category</h1>
+}
+else
+{
+    <table class="table sorting" id="pages">
+        <tr class="home">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr id="id_@item.Id">
+                <td>
+                    <div class="container">
+
+                        @*<div class="row">
+                            <div class="col">
+                                <div class="ajaxdivtd">
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="row">
+                            <div class="col-1">
+                                <div class="ajaxdivtd">
+                                </div>
+                                <div class="ui-icon ui-icon-arrow-2-n-s" style="margin-top: 10px;"></div>
+                            </div>
+                            <div class="row">
+                                @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                    </div>
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "DeleteCategory", new { id = item.Id }, new { @class = "delete btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@section Scripts
+{
+   <script src="~/Content/ShopJS/CategoruesViewJS.js"></script>
+}
